@@ -25,3 +25,10 @@ def obtener_mensaje_por_id(mensaje_id: int):
         if mensaje.id == mensaje_id:
             return mensaje
     raise HTTPException(status_code=404, detail="Mensaje no encontrado")
+
+# POST: Crear un nuevo mensaje
+@app.post("/mensajes/", response_model=Mensaje)
+def crear_mensaje(nuevo_mensaje: Mensaje):
+    nuevo_mensaje.id = len(mensajes_db) + 1
+    mensajes_db.append(nuevo_mensaje)
+    return nuevo_mensaje
