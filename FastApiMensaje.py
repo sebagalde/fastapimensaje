@@ -10,4 +10,10 @@ class Mensaje(BaseModel):
 
 app = FastAPI()
 
+# Simulación de base de datos en memoria
+mensajes_db: List[Mensaje] = []
 
+# GET: Obtener todos los mensajes
+@app.get("/mensajes/", response_model=List[Mensaje])
+def obtener_mensajes():
+    return mensajes_db
